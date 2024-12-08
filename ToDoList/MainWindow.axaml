@@ -2,24 +2,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="ToDoList.MainWindow"
         Title="To-Do List" Width="800" Height="600">
-    
+
     <StackPanel>
-        <TextBlock Text="To-Do List" HorizontalAlignment="Center" FontSize="30"/>
-        
-        <StackPanel Margin="10">
-            <TextBox x:Name="MyTextBox" Width="300" Text="Wpisz nazwę zadania"/>
-            <Button x:Name="MySubmit" Content="Dodaj Zadanie" Click="MySubmit_OnClick" HorizontalAlignment="Center" Margin="10"/>
+        <TextBlock Text="To-Do List" HorizontalAlignment="Center" FontSize="30" />
+
+        <StackPanel Margin="0 10 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox x:Name="TaskTextBox" Width="300" Watermark="Task description" />
+            <Button Content="Add task" Click="AddTask" Margin="20 0 0 0 " />
         </StackPanel>
 
-        <ListBox x:Name="MyListTasks" Height="300" Margin="10"/>
-        
-        <ComboBox x:Name="MyComboBox" SelectionChanged="MyComboBox_OnSelectionChanged" Margin="10">
-            <ComboBoxItem Content="Wszystko"/>
-            <ComboBoxItem Content="Do zrobienia"/>
-            <ComboBoxItem Content="Skończone"/>
-        </ComboBox>
+        <Grid Margin="10 0 10 0" ColumnDefinitions="*,Auto">
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBlock VerticalAlignment="Center">Filters:</TextBlock>
+                <ComboBox x:Name="FilterComboBox" SelectionChanged="FilterChanged" Margin="10">
+                    <ComboBoxItem Content="All" />
+                    <ComboBoxItem Content="Completed" />
+                    <ComboBoxItem Content="Not completed" />
+                </ComboBox>
+            </StackPanel>
 
-        <Button x:Name="MyDelete" Content="Usuń Zadanie" Click="MyDelete_OnClick" HorizontalAlignment="Center"/>
-        <CheckBox x:Name="MyCheckBox" Content="Zaznacz w celu ustawienia stanu zadania" Checked="MyCheckBox_Checked" Unchecked="MyCheckBox_Unchecked"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Content="Mark completed" Click="MarkTaskCompleted" Margin="0 0 10 0" />
+                <Button Content="Delete task" Click="DeleteTask" />
+            </StackPanel>
+        </Grid>
+
+        <ListBox x:Name="TasksListBox" Height="300" Margin="10 0 10 0 " />
+
     </StackPanel>
 </Window>
